@@ -90,6 +90,8 @@ newNode.setRight(buildTree(right));
 return newNode
 
 }
+let numberOfElements = arr.length;
+
 const root = buildTree(mergeSort(removeDuplicates(arr)));
 
 const getRoot = () => root;
@@ -104,8 +106,33 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 
+const insert = (inp) => {
+let pointer = root;
+let counter = 0;
+numberOfElements++;
+
+while(counter++ < Math.ceil(Math.log2(numberOfElements))){
+if(inp > pointer.getData() && pointer.getRight() != null) {
+  pointer = pointer.getRight();
+}
+if (inp < pointer.getData() && pointer.getLeft() != null) {
+  pointer = pointer.getLeft();
+}
+}
+if(inp > pointer.getData()) {
+  pointer.setRight(Node(inp))
+}
+if (inp < pointer.getData()) {
+  pointer.setLeft(Node(inp)) 
+} 
+};
+
+/* insert and delete wont work on root i think with the current design
+may or may not bother to fix that*/
+
 return {prettyPrint,
         getRoot, 
         removeDuplicates,
-        mergeSort}
+        mergeSort,
+        insert}
 }
