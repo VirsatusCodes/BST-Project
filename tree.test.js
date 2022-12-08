@@ -70,3 +70,15 @@ test('can delete a node targeted based on value that has no children', () => {
     removeTree.remove(3);
     expect(removeTree.getRoot()).toBe(null);
 });
+
+test('can find a node and return it to query instance', () => {
+    expect(threeTree.find(3)).toMatchObject(threeTree.getRoot().getRight());
+    expect(Object.is(threeTree.find(3), threeTree.getRoot().getRight())).toBe(true);
+    expect(threeTree.find(3)).toBe(threeTree.getRoot().getRight());
+    /* thought my object comparing was done wrong and in the process
+    learned a few different ways to compare objects, leaving them here
+    for reference            */
+})
+
+/* look up jest comparing object matchers */
+

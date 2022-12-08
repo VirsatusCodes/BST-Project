@@ -171,6 +171,20 @@ if (inp < pointerToPrevious.getData()) {
 /* insert and remove wont work on root i think with the current design
 may or may not bother to fix that*/
 
+const find = (inp) => {
+  let pointer = root;
+  
+  while(inp !== pointer.getData()){
+  
+  if(inp > pointer.getData()) {
+    pointer = pointer.getRight();
+  }
+  if (inp < pointer.getData()) {
+    pointer = pointer.getLeft();
+  }
+  }
+  return pointer
+  }
 
 return {prettyPrint,
         getRoot,
@@ -179,5 +193,5 @@ return {prettyPrint,
         mergeSort,
         insert,
         remove,
-        }
+        find}
 }
