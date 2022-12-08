@@ -3,11 +3,17 @@ import {Node, Tree} from '../BST-Project/tree';
 const threeTree = Tree([1,2,3]);
 const twoTree = Tree([1,2]);
 const bigTree = Tree([1,2,3,4,5,6,7,8,1,2,3,4,5,4,3,4,5,6,7,8]);
-const testTree = Tree([1,2,3,5,6]);
 
 test('linked properly', () => {
     expect(Node);
     expect(Tree);
+});
+
+test('setRoot works', () => {
+    const rootTest = Tree([1]);
+    expect(rootTest.getRoot().getData()).toBe(1);
+    rootTest.setRoot(null);
+    expect(rootTest.getRoot()).toBe(null);
 });
 
 test('remove duplicate values', () => {
@@ -36,6 +42,7 @@ test('works on bigger trees(8)', () => {
 });
 
 test('can add 1 node to a tree in the right spot', () => {
+    const testTree = Tree([1,2,3,5,6]);
     expect(testTree.getRoot().getData()).toBe(3);
     expect(testTree.getRoot().getRight().getData()).toBe(6)
     expect(testTree.getRoot().getRight().getLeft().getData()).toBe(5)
@@ -49,4 +56,17 @@ test('can add 1 node to a tree in the right spot', () => {
     expect(testTree.getRoot().getRight().getRight().getRight().getData()).toBe(8);
     testTree.insert(9);
     expect(testTree.getRoot().getRight().getRight().getRight().getRight().getData()).toBe(9);
-})
+});
+
+test('can delete a node targeted based on value that has no children', () => {
+    const removeTree = Tree([1,2,3,4]);
+    expect(removeTree.getRoot().getRight().getData()).toBe(4);
+    removeTree.remove(4);
+    expect(removeTree.getRoot().getRight()).toBe(null);
+    removeTree.remove(1);
+    expect(removeTree.getRoot().getLeft().getLeft()).toBe(null);
+    removeTree.remove(2);
+    expect(removeTree.getRoot().getLeft()).toBe(null);
+    removeTree.remove(3);
+    expect(removeTree.getRoot()).toBe(null);
+});

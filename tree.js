@@ -88,13 +88,16 @@ newNode.setLeft(buildTree(left));
 newNode.setRight(buildTree(right)); 
 
 return newNode
-
 }
 let numberOfElements = arr.length;
 
-const root = buildTree(mergeSort(removeDuplicates(arr)));
+let root = buildTree(mergeSort(removeDuplicates(arr)));
 
 const getRoot = () => root;
+
+const setRoot = (inp) => root = inp;
+/* may want to have setRoot automatically create a node using
+the inp value instead of setting the root to inp, potentially. */
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node.getRight() !== null) {
@@ -107,15 +110,17 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 const insert = (inp) => {
+  /* would want to include checking if value is already
+  present in the BST in further development of this function for sure */
 let pointer = root;
 let counter = 0;
 numberOfElements++;
 
 while(counter++ < Math.ceil(Math.log2(numberOfElements))){
-if(inp > pointer.getData() && pointer.getRight() != null) {
+if(inp > pointer.getData() && pointer.getRight() !== null) {
   pointer = pointer.getRight();
 }
-if (inp < pointer.getData() && pointer.getLeft() != null) {
+if (inp < pointer.getData() && pointer.getLeft() !== null) {
   pointer = pointer.getLeft();
 }
 }
@@ -127,12 +132,52 @@ if (inp < pointer.getData()) {
 } 
 };
 
-/* insert and delete wont work on root i think with the current design
+const remove = (inp) => {
+let pointer = root;
+let pointerToPrevious;
+if(pointer.getLeft() === null && pointer.getRight() === null && pointer.getData() === inp) {
+  setRoot(null);
+}
+
+else {
+while(inp !== pointer.getData()){
+pointerToPrevious = pointer;
+
+if(inp > pointer.getData()) {
+  pointer = pointer.getRight();
+}
+if (inp < pointer.getData()) {
+  pointer = pointer.getLeft();
+}/* use the : statement here for if theres children */
+}
+if(inp > pointerToPrevious.getData()) {
+  pointerToPrevious.setRight(null);
+}
+if (inp < pointerToPrevious.getData()) {
+  pointerToPrevious.setLeft(null) ;
+} 
+}
+};
+/* 4 cases
+  1, if it is the tip of a branch just set null
+  2, if it has 1 child bring up next value as new node there
+  3, if it has 2 children go to the right once, then go to the furthest left and
+  use that value.
+  4, but if theres another value after that (should only be right) to the right
+  
+  NOTE you only have to set child node as new node you dont have to necessarily change paths of
+  all the different nodes constantly*/
+
+/* insert and remove wont work on root i think with the current design
 may or may not bother to fix that*/
 
+
 return {prettyPrint,
-        getRoot, 
+        getRoot,
+        setRoot, 
         removeDuplicates,
         mergeSort,
-        insert}
+        insert,
+        remove,
+        }
 }
