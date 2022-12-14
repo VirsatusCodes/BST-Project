@@ -71,14 +71,30 @@ test('can delete a node targeted based on value that has no children', () => {
     expect(removeTree.getRoot()).toBe(null);
 });
 
+test('can delete a node that has 1 child and alter the tree accordingly', () => {
+    const removeTree2 = Tree([1,2,3,4,5]);
+    removeTree2.remove(2);
+    expect(removeTree2.getRoot().getLeft().getData()).toBe(1);
+    removeTree2.remove(5);
+    expect(removeTree2.getRoot().getRight().getData()).toBe(4);
+});
+
+test('can delete a node that has 2 childen and alter the tree properly', () => {
+    const removeTree3 = Tree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
+    expect(removeTree3.getRoot().getRight().getData()).toBe(13);
+    expect(removeTree3.find(15).getLeft().getData()).toBe(14);
+    removeTree3.remove(13);
+    expect(removeTree3.getRoot().getRight().getData()).toBe(14);
+    expect(removeTree3.find(15).getLeft()).toBe(null)
+});
+
 test('can find a node and return it to query instance', () => {
     expect(threeTree.find(3)).toMatchObject(threeTree.getRoot().getRight());
     expect(Object.is(threeTree.find(3), threeTree.getRoot().getRight())).toBe(true);
     expect(threeTree.find(3)).toBe(threeTree.getRoot().getRight());
+    expect(threeTree.find(3).getData()).toBe(3);
     /* thought my object comparing was done wrong and in the process
     learned a few different ways to compare objects, leaving them here
-    for reference            */
+    for reference*/
 })
-
-/* look up jest comparing object matchers */
 

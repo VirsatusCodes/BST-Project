@@ -9,8 +9,14 @@ const Node = (inp) => {
   const getRight = () => right;
   const setLeft = (inp) => left = inp;
   const setRight = (inp) => right = inp;
+  const setData = (inp) => data = inp;
 
-  return {getData, getLeft, getRight, setLeft, setRight}
+  return {getData,
+          getLeft,
+          getRight,
+          setLeft,
+          setRight,
+          setData}
 }
 
 const Tree = (arr) => {
@@ -89,7 +95,6 @@ newNode.setRight(buildTree(right));
 
 return newNode
 }
-let numberOfElements = arr.length;
 
 let root = buildTree(mergeSort(removeDuplicates(arr)));
 
@@ -112,6 +117,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 const insert = (inp) => {
   /* would want to include checking if value is already
   present in the BST in further development of this function for sure */
+let numberOfElements = arr.length;
 let pointer = root;
 let counter = 0;
 numberOfElements++;
@@ -132,56 +138,63 @@ if (inp < pointer.getData()) {
 } 
 };
 
+
 const remove = (inp) => {
-let pointer = root;
-let pointerToPrevious;
-if(pointer.getLeft() === null && pointer.getRight() === null && pointer.getData() === inp) {
-  setRoot(null);
-}
-
-else {
-while(inp !== pointer.getData()){
-pointerToPrevious = pointer;
-
-if(inp > pointer.getData()) {
-  pointer = pointer.getRight();
-}
-if (inp < pointer.getData()) {
-  pointer = pointer.getLeft();
-}/* use the : statement here for if theres children */
-}
-if(inp > pointerToPrevious.getData()) {
-  pointerToPrevious.setRight(null);
-}
-if (inp < pointerToPrevious.getData()) {
-  pointerToPrevious.setLeft(null) ;
-} 
-}
-};
-/* 4 cases
-  1, if it is the tip of a branch just set null
-  2, if it has 1 child bring up next value as new node there
-  3, if it has 2 children go to the right once, then go to the furthest left and
-  use that value.
-  4, but if theres another value after that (should only be right) to the right
+  let pointer = root;
+  let pointerToPrevious;
+    if(pointer.getLeft() === null && pointer.getRight() === null && pointer.getData() === inp) {
+    setRoot(null);
+  }
   
-  NOTE you only have to set child node as new node you dont have to necessarily change paths of
-  all the different nodes constantly*/
+    else {
+      while(inp !== pointer.getData()){
+      pointerToPrevious = pointer;
+  
+      inp > pointer.getData() ? 
+      pointer = pointer.getRight() : 
+      pointer = pointer.getLeft();
+    }
+    if(pointer.getLeft() === null && pointer.getRight() === null ){
 
-/* insert and remove wont work on root i think with the current design
-may or may not bother to fix that*/
+      inp > pointerToPrevious.getData() ? 
+      pointerToPrevious.setRight(null) : 
+      pointerToPrevious.setLeft(null);
+
+    } else if(pointer.getLeft() === null && pointer.getRight() !== null){
+
+      inp > pointerToPrevious.getData()?
+      pointerToPrevious.setRight(pointer.getRight()) :
+      pointerToPrevious.setLeft(pointer.getRight())
+
+    } else if(pointer.getLeft() !== null && pointer.getRight() === null){
+
+      inp < pointerToPrevious.getData()?
+      pointerToPrevious.setLeft(pointer.getLeft()) :
+      pointerToPrevious.setRight(pointer.getLeft())
+    } else {
+
+      let originalTarget = pointer;
+      pointer = pointer.getRight();
+      
+      while(pointer.getLeft() !== null) {
+        pointerToPrevious = pointer;
+        pointer = pointer.getLeft();
+      };
+
+      originalTarget.setData(pointer.getData());
+      pointerToPrevious.setLeft(null);
+    }
+    }
+  };
 
 const find = (inp) => {
   let pointer = root;
   
   while(inp !== pointer.getData()){
   
-  if(inp > pointer.getData()) {
-    pointer = pointer.getRight();
-  }
-  if (inp < pointer.getData()) {
-    pointer = pointer.getLeft();
-  }
+    inp > pointer.getData() ? 
+      pointer = pointer.getRight() : 
+      pointer = pointer.getLeft();
   }
   return pointer
   }
@@ -195,3 +208,6 @@ return {prettyPrint,
         remove,
         find}
 }
+/* many of these functions arent tested for if the BST is empty,
+and definitely wouldnt work among a few other variables, not looking
+to make it work for all use cases atm*/
