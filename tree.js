@@ -175,7 +175,7 @@ const remove = (inp) => {
 
       let originalTarget = pointer;
       pointer = pointer.getRight();
-      
+
       while(pointer.getLeft() !== null) {
         pointerToPrevious = pointer;
         pointer = pointer.getLeft();
@@ -199,6 +199,51 @@ const find = (inp) => {
   return pointer
   }
 
+/* const levelOrder = (node, nodeValues = [], func) => {
+  let pointer = node;
+
+ if(pointer === null) return;
+
+ nodeValues.push(pointer.getData());
+
+console.log(node.getData());
+console.log(nodeValues);
+
+ levelOrder(pointer.getLeft(), nodeValues);
+ levelOrder(pointer.getRight(), nodeValues);
+return nodeValues
+} */
+
+const levelOrder = (nodeVisitLog = [getRoot()], nodeValues = [] , func) => {
+  console.log(nodeVisitLog)
+  console.log('initial')
+if(!nodeVisitLog[0]) {
+  console.log(nodeVisitLog)
+  console.log('base case')
+  return
+
+  
+}
+console.log('main func')
+ nodeValues.push(nodeVisitLog[0].getData());
+ 
+ nodeVisitLog[0].getLeft() ? 
+ nodeVisitLog.push(nodeVisitLog[0].getLeft()) : console.log('left null');
+
+ nodeVisitLog[0].getRight() ? 
+ nodeVisitLog.push(nodeVisitLog[0].getRight()) : console.log('right null');
+
+ nodeVisitLog.shift();
+
+console.log(nodeValues);
+console.log(nodeVisitLog)
+
+levelOrder(nodeVisitLog, nodeValues)
+
+return nodeValues
+};
+/* top version returns values from left to right kinda */
+
 return {prettyPrint,
         getRoot,
         setRoot, 
@@ -206,7 +251,8 @@ return {prettyPrint,
         mergeSort,
         insert,
         remove,
-        find}
+        find,
+        levelOrder}
 }
 /* many of these functions arent tested for if the BST is empty,
 and definitely wouldnt work among a few other variables, not looking
