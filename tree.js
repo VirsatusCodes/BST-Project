@@ -214,30 +214,34 @@ console.log(nodeValues);
 return nodeValues
 } */
 
-const levelOrder = (func ,nodeVisitLog = [getRoot()], nodeValues = []) => {
+const levelOrder = (func ,nodeVisitLog = [getRoot()], nodeValues = [], counter = 0) => {
 if(!nodeVisitLog[0]) {
-  return
-}
-
+  return;
+};
  nodeValues.push(nodeVisitLog[0].getData());
- 
- nodeVisitLog[0].getLeft() ? 
- nodeVisitLog.push(nodeVisitLog[0].getLeft()): console.log('left null');
 
- nodeVisitLog[0].getRight() ? 
- nodeVisitLog.push(nodeVisitLog[0].getRight()) : console.log('right null');
+ if(nodeVisitLog[0].getLeft()) {
+  nodeVisitLog.push(nodeVisitLog[0].getLeft());
+ };
+ if(nodeVisitLog[0].getRight()) {
+  nodeVisitLog.push(nodeVisitLog[0].getRight());
+ };
 
  nodeVisitLog.shift();
 
-levelOrder(func, nodeVisitLog, nodeValues)
+levelOrder(func, nodeVisitLog, nodeValues, counter+= 1);
 
-if(func === undefined) {
+counter--;
 
-  return nodeValues
-}
-
-
+if(func === undefined && counter === 0) {
+  return nodeValues;
+};
+if(typeof(func) === 'function' && counter === 0) {
 return func(nodeValues);
+}
+else {
+  return 'you didnt give me a proper functionnnn'
+}
 };
 /* top version returns values from left to right kinda */
 

@@ -98,7 +98,7 @@ test('can find a node and return it to query instance', () => {
     for reference*/
 })
 
-test('can return all values in levelOrder trave rsal', () => {
+test('can return all values in levelOrder traversal', () => {
     expect(threeTree.levelOrder()).toStrictEqual([2,1,3]);
     const levelTree = Tree([1,2,3,4,5,6]);
     expect(levelTree.levelOrder()).toStrictEqual([4,2,6,1,3,5]);
