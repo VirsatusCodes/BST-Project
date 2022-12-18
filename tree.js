@@ -228,22 +228,22 @@ else {
   return 'you didnt give me a proper functionnnn'
 }
 };
+/* wont bother making a iterative version of levelorder as
+i have no trouble with iteration, recursive is my struggle atm
+so solving it that way is enough for me. */
 
 const inOrder = () => {
 
 }
 
-const preOrder = (node = root, nodeValues = [], func) => {
-  
+const preOrder = (func, node = root, nodeValues = []) => {
    if(node === null ) {
     return
    }
-   console.log(nodeValues);
-   console.log(node.getData());
    nodeValues.push(node.getData());
   
-   preOrder(node.getLeft(), nodeValues);
-   preOrder(node.getRight(), nodeValues);
+   preOrder(func, node.getLeft(), nodeValues);
+   preOrder(func, node.getRight(), nodeValues);
    
    return nodeValues
 }
@@ -251,9 +251,7 @@ const preOrder = (node = root, nodeValues = [], func) => {
 const postOrder = () => {
 
 }
-/* wont bother making a iterative version of levelorder as
-i have no trouble with iteration, recursive is my struggle atm
-so solving it that way is enough for me. */
+
 
 return {prettyPrint,
         getRoot,

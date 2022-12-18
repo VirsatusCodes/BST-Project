@@ -117,3 +117,20 @@ test('preOrder returns values in correct order', () => {
     expect(sixTree.preOrder()).toStrictEqual([4,2,1,3,6,5]);
     expect(eightTree.preOrder()).toStrictEqual([5,3,2,1,4,7,6,8]);
 });
+
+test('preOrder can use a function properly', () => {
+    const func = (inp) => {
+        return inp
+       };
+    expect(eightTree.preOrder(func)).toStrictEqual([5,3,2,1,4,7,6,8]);
+});
+
+/* test('inOrder returns values in correct order', () => {
+    expect(sixTree.inOrder()).toStrictEqual([1,2,3,4,5,6]);
+    expect(eightTree.inOrder()).toStrictEqual([1,2,3,4,5,6,7,8]);
+});
+
+test('postOrder returns values in correct order', () => {
+    expect(sixTree.postOrder()).toStrictEqual([1,2,3,4,5,6]);
+    expect(eightTree.postOrder()).toStrictEqual([1,2,3,4,5,6,7,8]);
+}); */
