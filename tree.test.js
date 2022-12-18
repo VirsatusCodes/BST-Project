@@ -97,19 +97,23 @@ test('can find a node and return it to query instance', () => {
     learned a few different ways to compare objects, leaving them here
     for reference*/
 })
-
+    const sixTree = Tree([1,2,3,4,5,6]);
+    const eightTree = Tree([1,2,3,4,5,6,7,8]);
 test('can return all values in levelOrder traversal', () => {
     expect(threeTree.levelOrder()).toStrictEqual([2,1,3]);
-    const levelTree = Tree([1,2,3,4,5,6]);
-    expect(levelTree.levelOrder()).toStrictEqual([4,2,6,1,3,5]);
-    const levelTree2 = Tree([1,2,3,4,5,6,7,8]);
-    expect(levelTree2.levelOrder()).toStrictEqual([5,3,7,2,4,6,8,1]);
+    expect(sixTree.levelOrder()).toStrictEqual([4,2,6,1,3,5]);
+    expect(eightTree.levelOrder()).toStrictEqual([5,3,7,2,4,6,8,1]);
 });
 
 test('levelOrder can take a function', () => {
     const func = (inp) => {
      return inp
     };
-    const levelTree2 = Tree([1,2,3,4,5,6,7,8]);
-    expect(levelTree2.levelOrder(func)).toStrictEqual([5,3,7,2,4,6,8,1]);
+    const eightTree = Tree([1,2,3,4,5,6,7,8]);
+    expect(eightTree.levelOrder(func)).toStrictEqual([5,3,7,2,4,6,8,1]);
+});
+
+test('preOrder returns values in correct order', () => {
+    expect(sixTree.preOrder()).toStrictEqual([4,2,1,3,6,5]);
+    expect(eightTree.preOrder()).toStrictEqual([5,3,2,1,4,7,6,8]);
 });

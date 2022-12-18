@@ -199,21 +199,6 @@ const find = (inp) => {
   return pointer
   }
 
-/* const levelOrder = (node, nodeValues = [], func) => {
-  let pointer = node;
-
- if(pointer === null) return;
-
- nodeValues.push(pointer.getData());
-
-console.log(node.getData());
-console.log(nodeValues);
-
- levelOrder(pointer.getLeft(), nodeValues);
- levelOrder(pointer.getRight(), nodeValues);
-return nodeValues
-} */
-
 const levelOrder = (func ,nodeVisitLog = [getRoot()], nodeValues = [], counter = 0) => {
 if(!nodeVisitLog[0]) {
   return;
@@ -243,7 +228,32 @@ else {
   return 'you didnt give me a proper functionnnn'
 }
 };
-/* top version returns values from left to right kinda */
+
+const inOrder = () => {
+
+}
+
+const preOrder = (node = root, nodeValues = [], func) => {
+  
+   if(node === null ) {
+    return
+   }
+   console.log(nodeValues);
+   console.log(node.getData());
+   nodeValues.push(node.getData());
+  
+   preOrder(node.getLeft(), nodeValues);
+   preOrder(node.getRight(), nodeValues);
+   
+   return nodeValues
+}
+
+const postOrder = () => {
+
+}
+/* wont bother making a iterative version of levelorder as
+i have no trouble with iteration, recursive is my struggle atm
+so solving it that way is enough for me. */
 
 return {prettyPrint,
         getRoot,
@@ -253,7 +263,10 @@ return {prettyPrint,
         insert,
         remove,
         find,
-        levelOrder}
+        levelOrder,
+        inOrder,
+        preOrder,
+        postOrder}
 }
 /* many of these functions arent tested for if the BST is empty,
 and definitely wouldnt work among a few other variables, not looking
