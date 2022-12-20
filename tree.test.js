@@ -105,10 +105,11 @@ test('can return all values in levelOrder traversal', () => {
     expect(eightTree.levelOrder()).toStrictEqual([5,3,7,2,4,6,8,1]);
 });
 
+const func = (inp) => {
+    return inp
+   };
+
 test('levelOrder can take a function', () => {
-    const func = (inp) => {
-     return inp
-    };
     const eightTree = Tree([1,2,3,4,5,6,7,8]);
     expect(eightTree.levelOrder(func)).toStrictEqual([5,3,7,2,4,6,8,1]);
 });
@@ -119,18 +120,23 @@ test('preOrder returns values in correct order', () => {
 });
 
 test('preOrder can use a function properly', () => {
-    const func = (inp) => {
-        return inp
-       };
     expect(eightTree.preOrder(func)).toStrictEqual([5,3,2,1,4,7,6,8]);
 });
 
-/* test('inOrder returns values in correct order', () => {
+test('inOrder returns values in correct order', () => {
     expect(sixTree.inOrder()).toStrictEqual([1,2,3,4,5,6]);
     expect(eightTree.inOrder()).toStrictEqual([1,2,3,4,5,6,7,8]);
 });
 
-test('postOrder returns values in correct order', () => {
-    expect(sixTree.postOrder()).toStrictEqual([1,2,3,4,5,6]);
-    expect(eightTree.postOrder()).toStrictEqual([1,2,3,4,5,6,7,8]);
-}); */
+test('inOrder can use a function', () => {
+    expect(eightTree.inOrder(func)).toStrictEqual([1,2,3,4,5,6,7,8]);
+});
+/* post is not in the right order atm video didnt load remember? */
+test.skip('postOrder returns values in correct order', () => {
+    expect(sixTree.postOrder()).toStrictEqual([1,3,2,5,6,4]);
+    expect(eightTree.postOrder()).toStrictEqual([1,2,4,3,6,8,7,5]);
+});
+
+test.skip('postOrder can use a function', () => {
+    expect(eightTree.postOrder(func)).toStrictEqual([1,2,4,3,6,8,7,5]);
+});

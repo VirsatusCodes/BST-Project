@@ -232,7 +232,17 @@ else {
 i have no trouble with iteration, recursive is my struggle atm
 so solving it that way is enough for me. */
 
-const inOrder = () => {
+const inOrder = (func, node = root, nodeValues = []) => {
+  if(node === null ) {
+    return
+   }
+   inOrder(func, node.getLeft(), nodeValues);
+
+   nodeValues.push(node.getData());
+
+   inOrder(func, node.getRight(), nodeValues);
+
+   return nodeValues
 
 }
 
