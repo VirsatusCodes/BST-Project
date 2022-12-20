@@ -243,7 +243,6 @@ const inOrder = (func, node = root, nodeValues = []) => {
    inOrder(func, node.getRight(), nodeValues);
 
    return nodeValues
-
 }
 
 const preOrder = (func, node = root, nodeValues = []) => {
@@ -258,8 +257,16 @@ const preOrder = (func, node = root, nodeValues = []) => {
    return nodeValues
 }
 
-const postOrder = () => {
+const postOrder = (func, node = root, nodeValues = []) => {
+  if(node === null ) {
+    return
+   }
+   postOrder(func, node.getLeft(), nodeValues);
+   postOrder(func, node.getRight(), nodeValues);
 
+   nodeValues.push(node.getData());
+
+   return nodeValues
 }
 
 

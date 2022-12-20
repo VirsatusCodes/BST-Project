@@ -131,12 +131,12 @@ test('inOrder returns values in correct order', () => {
 test('inOrder can use a function', () => {
     expect(eightTree.inOrder(func)).toStrictEqual([1,2,3,4,5,6,7,8]);
 });
-/* post is not in the right order atm video didnt load remember? */
-test.skip('postOrder returns values in correct order', () => {
+
+test('postOrder returns values in correct order', () => {
     expect(sixTree.postOrder()).toStrictEqual([1,3,2,5,6,4]);
     expect(eightTree.postOrder()).toStrictEqual([1,2,4,3,6,8,7,5]);
 });
 
-test.skip('postOrder can use a function', () => {
+test('postOrder can use a function', () => {
     expect(eightTree.postOrder(func)).toStrictEqual([1,2,4,3,6,8,7,5]);
 });
