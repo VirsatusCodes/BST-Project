@@ -106,12 +106,12 @@ test('can return all values in levelOrder traversal', () => {
 });
 
 const func = (inp) => {
-    return inp
+    return inp[0] * 2
    };
 
 test('levelOrder can take a function', () => {
     const eightTree = Tree([1,2,3,4,5,6,7,8]);
-    expect(eightTree.levelOrder(func)).toStrictEqual([5,3,7,2,4,6,8,1]);
+    expect(eightTree.levelOrder(func)).toBe(10);
 });
 
 test('preOrder returns values in correct order', () => {
@@ -120,7 +120,7 @@ test('preOrder returns values in correct order', () => {
 });
 
 test('preOrder can use a function properly', () => {
-    expect(eightTree.preOrder(func)).toStrictEqual([5,3,2,1,4,7,6,8]);
+    expect(eightTree.preOrder(func)).toBe(10);
 });
 
 test('inOrder returns values in correct order', () => {
@@ -129,7 +129,7 @@ test('inOrder returns values in correct order', () => {
 });
 
 test('inOrder can use a function', () => {
-    expect(eightTree.inOrder(func)).toStrictEqual([1,2,3,4,5,6,7,8]);
+    expect(eightTree.inOrder(func)).toBe(2);
 });
 
 test('postOrder returns values in correct order', () => {
@@ -138,5 +138,5 @@ test('postOrder returns values in correct order', () => {
 });
 
 test('postOrder can use a function', () => {
-    expect(eightTree.postOrder(func)).toStrictEqual([1,2,4,3,6,8,7,5]);
+    expect(eightTree.postOrder(func)).toBe(2);
 });

@@ -232,7 +232,7 @@ else {
 i have no trouble with iteration, recursive is my struggle atm
 so solving it that way is enough for me. */
 
-const inOrder = (func, node = root, nodeValues = []) => {
+const inOrder = (func, node = root, nodeValues = [], counter = 0) => {
   if(node === null ) {
     return
    }
@@ -242,10 +242,18 @@ const inOrder = (func, node = root, nodeValues = []) => {
 
    inOrder(func, node.getRight(), nodeValues);
 
-   return nodeValues
+   if(func === undefined && counter === 0) {
+    return nodeValues;
+  };
+  if(typeof(func) === 'function' && counter === 0) {
+  return func(nodeValues);
+  }
+  else {
+    return 'you didnt give me a proper functionnnn'
+  }
 }
 
-const preOrder = (func, node = root, nodeValues = []) => {
+const preOrder = (func, node = root, nodeValues = [], counter = 0) => {
    if(node === null ) {
     return
    }
@@ -254,10 +262,18 @@ const preOrder = (func, node = root, nodeValues = []) => {
    preOrder(func, node.getLeft(), nodeValues);
    preOrder(func, node.getRight(), nodeValues);
    
-   return nodeValues
+   if(func === undefined && counter === 0) {
+    return nodeValues;
+  };
+  if(typeof(func) === 'function' && counter === 0) {
+  return func(nodeValues);
+  }
+  else {
+    return 'you didnt give me a proper functionnnn'
+  }
 }
 
-const postOrder = (func, node = root, nodeValues = []) => {
+const postOrder = (func, node = root, nodeValues = [], counter = 0) => {
   if(node === null ) {
     return
    }
@@ -266,8 +282,32 @@ const postOrder = (func, node = root, nodeValues = []) => {
 
    nodeValues.push(node.getData());
 
-   return nodeValues
+   if(func === undefined && counter === 0) {
+    return nodeValues;
+  };
+  if(typeof(func) === 'function' && counter === 0) {
+  return func(nodeValues);
+  }
+  else {
+    return 'you didnt give me a proper functionnnn'
+  }
 }
+
+ const height = () => {
+
+ };
+
+ const depth = () => {
+
+ };
+
+ const isBalanced = () => {
+
+ };
+
+ const rebalance = () => {
+
+ };
 
 
 return {prettyPrint,
@@ -281,7 +321,11 @@ return {prettyPrint,
         levelOrder,
         inOrder,
         preOrder,
-        postOrder}
+        postOrder,
+        height,
+        depth,
+        isBalanced,
+        rebalance}
 }
 /* many of these functions arent tested for if the BST is empty,
 and definitely wouldnt work among a few other variables, not looking
