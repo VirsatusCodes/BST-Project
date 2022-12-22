@@ -140,39 +140,41 @@ if (inp < pointer.getData()) {
 
 
 const remove = (inp) => {
-  let pointer = root;
+  let pointer = find(inp);
   let pointerToPrevious;
-    if(pointer.getLeft() === null && pointer.getRight() === null && pointer.getData() === inp) {
+  console.log([inOrder().indexOf(inp) - 1], 'index')
+
+    if(getRoot().getLeft() === null && getRoot().getRight() === null && getRoot().getData() === inp) {
     setRoot(null);
   }
   
-    else {
-      while(inp !== pointer.getData()){
-      pointerToPrevious = pointer;
-  
-      inp > pointer.getData() ? 
-      pointer = pointer.getRight() : 
-      pointer = pointer.getLeft();
-    }
-    if(pointer.getLeft() === null && pointer.getRight() === null ){
+  else {
 
+    inp > getRoot().getData() ?
+    pointerToPrevious = find(inOrder()[inOrder().indexOf(inp) - 1]):
+    pointerToPrevious = find(inOrder()[inOrder().indexOf(inp) + 1]);
+    
+    if(pointer.getLeft() === null && pointer.getRight() === null ){
+      console.log('test1')
+      console.log(pointer.getData(), 'target in remove')
+      console.log(pointerToPrevious.getData(), 'previous in remove')
       inp > pointerToPrevious.getData() ? 
       pointerToPrevious.setRight(null) : 
       pointerToPrevious.setLeft(null);
 
     } else if(pointer.getLeft() === null && pointer.getRight() !== null){
-
+      console.log('test2')
       inp > pointerToPrevious.getData()?
       pointerToPrevious.setRight(pointer.getRight()) :
       pointerToPrevious.setLeft(pointer.getRight())
 
     } else if(pointer.getLeft() !== null && pointer.getRight() === null){
-
+      console.log('test3')
       inp < pointerToPrevious.getData()?
       pointerToPrevious.setLeft(pointer.getLeft()) :
       pointerToPrevious.setRight(pointer.getLeft())
     } else {
-
+      console.log('test4')
       let originalTarget = pointer;
       pointer = pointer.getRight();
 
@@ -189,13 +191,17 @@ const remove = (inp) => {
 
 const find = (inp) => {
   let pointer = root;
-  
+  console.log(pointer.getData(), 'root data in find');
+  console.log(inp, 'target in find')
+
   while(inp !== pointer.getData()){
-  
+    console.log(pointer.getData(), ' before iteration pointer in find')
     inp > pointer.getData() ? 
       pointer = pointer.getRight() : 
       pointer = pointer.getLeft();
-  }
+
+}
+  console.log(pointer.getData(), 'final pointer in find')
   return pointer
   }
 
