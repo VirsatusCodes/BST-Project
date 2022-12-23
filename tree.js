@@ -232,7 +232,7 @@ else {
 i have no trouble with iteration, recursive is my struggle atm
 so solving it that way is enough for me. */
 
-const inOrder = (func, node = root, nodeValues = [], counter = 0) => {
+const inOrder = (func, node = root, nodeValues = []) => {
   if(node === null ) {
     return
    }
@@ -242,10 +242,11 @@ const inOrder = (func, node = root, nodeValues = [], counter = 0) => {
 
    inOrder(func, node.getRight(), nodeValues);
 
-   if(func === undefined && counter === 0) {
+
+   if(func === undefined) {
     return nodeValues;
   };
-  if(typeof(func) === 'function' && counter === 0) {
+  if(typeof(func) === 'function') {
   return func(nodeValues);
   }
   else {
@@ -253,7 +254,7 @@ const inOrder = (func, node = root, nodeValues = [], counter = 0) => {
   }
 }
 
-const preOrder = (func, node = root, nodeValues = [], counter = 0) => {
+const preOrder = (func, node = root, nodeValues = []) => {
    if(node === null ) {
     return
    }
@@ -262,10 +263,10 @@ const preOrder = (func, node = root, nodeValues = [], counter = 0) => {
    preOrder(func, node.getLeft(), nodeValues);
    preOrder(func, node.getRight(), nodeValues);
    
-   if(func === undefined && counter === 0) {
+   if(func === undefined) {
     return nodeValues;
   };
-  if(typeof(func) === 'function' && counter === 0) {
+  if(typeof(func) === 'function') {
   return func(nodeValues);
   }
   else {
@@ -273,7 +274,7 @@ const preOrder = (func, node = root, nodeValues = [], counter = 0) => {
   }
 }
 
-const postOrder = (func, node = root, nodeValues = [], counter = 0) => {
+const postOrder = (func, node = root, nodeValues = []) => {
   if(node === null ) {
     return
    }
@@ -282,10 +283,10 @@ const postOrder = (func, node = root, nodeValues = [], counter = 0) => {
 
    nodeValues.push(node.getData());
 
-   if(func === undefined && counter === 0) {
+   if(func === undefined) {
     return nodeValues;
   };
-  if(typeof(func) === 'function' && counter === 0) {
+  if(typeof(func) === 'function') {
   return func(nodeValues);
   }
   else {
@@ -293,9 +294,19 @@ const postOrder = (func, node = root, nodeValues = [], counter = 0) => {
   }
 }
 
- const height = () => {
+/* find how far it is to a node w/out children in longest path */
+ const height = (inp) => {
+  let counter = 0;
+  
+  while(inp.getLeft() !== null || inp.getRight() !== null) {
+    inp.getLeft()!== null ?
+    inp = inp.getLeft() :
+    inp = inp.getLeft()
 
- };
+    counter++
+  }
+  return counter
+   };
 
  const depth = () => {
 
@@ -327,6 +338,5 @@ return {prettyPrint,
         isBalanced,
         rebalance}
 }
-/* many of these functions arent tested for if the BST is empty,
-and definitely wouldnt work among a few other variables, not looking
+/* many of these functions are fragile, not looking
 to make it work for all use cases atm*/

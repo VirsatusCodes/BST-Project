@@ -3,6 +3,7 @@ import {Node, Tree} from '../BST-Project/tree';
 const threeTree = Tree([1,2,3]);
 const twoTree = Tree([1,2]);
 const bigTree = Tree([1,2,3,4,5,6,7,8,1,2,3,4,5,4,3,4,5,6,7,8]);
+const twentyTree = Tree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 
 test('linked properly', () => {
     expect(Node);
@@ -75,12 +76,12 @@ test('can delete a node targeted based on value that has no children', () => {
 
 test('can delete a node that has 1 child and alter the tree accordingly', () => {
     const removeTree2 = Tree([1,2,3,4,5]);
-    removeTree2.prettyPrint(removeTree2.getRoot())
+    /* removeTree2.prettyPrint(removeTree2.getRoot()) */
     removeTree2.remove(2);
-    removeTree2.prettyPrint(removeTree2.getRoot())
+    /* removeTree2.prettyPrint(removeTree2.getRoot()) */
     expect(removeTree2.getRoot().getLeft().getData()).toBe(1);
     removeTree2.remove(5);
-    removeTree2.prettyPrint(removeTree2.getRoot())
+    /* removeTree2.prettyPrint(removeTree2.getRoot()) */
     expect(removeTree2.getRoot().getRight().getData()).toBe(4);
 });
 
@@ -144,4 +145,13 @@ test('postOrder returns values in correct order', () => {
 
 test('postOrder can use a function', () => {
     expect(eightTree.postOrder(func)).toBe(2);
+});
+
+test('height returns correct path length', () => {
+    expect(threeTree.height(threeTree.find(3))).toBe(0);
+    expect(threeTree.height(threeTree.find(2))).toBe(1);
+    twentyTree.prettyPrint(twentyTree.getRoot());
+    expect(twentyTree.height(twentyTree.find(9))).toBe(2);
+    expect(twentyTree.height(twentyTree.find(6))).toBe(3);
+    expect(twentyTree.height(twentyTree.find(11))).toBe(4);
 });
