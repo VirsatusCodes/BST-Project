@@ -73,25 +73,25 @@ test('can delete a node targeted based on value that has no children', () => {
     expect(removeTree.getRoot()).toBe(null);
 });
 
-test.only('can delete a node that has 1 child and alter the tree accordingly', () => {
+test('can delete a node that has 1 child and alter the tree accordingly', () => {
     const removeTree2 = Tree([1,2,3,4,5]);
     removeTree2.prettyPrint(removeTree2.getRoot())
     removeTree2.remove(2);
     removeTree2.prettyPrint(removeTree2.getRoot())
     expect(removeTree2.getRoot().getLeft().getData()).toBe(1);
     removeTree2.remove(5);
-/*     removeTree2.prettyPrint(removeTree2.getRoot()) */
+    removeTree2.prettyPrint(removeTree2.getRoot())
     expect(removeTree2.getRoot().getRight().getData()).toBe(4);
 });
 
-/* test('can delete a node that has 2 childen and alter the tree properly', () => {
+test('can delete a node that has 2 childen and alter the tree properly', () => {
     const removeTree3 = Tree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
     expect(removeTree3.getRoot().getRight().getData()).toBe(13);
     expect(removeTree3.find(15).getLeft().getData()).toBe(14);
     removeTree3.remove(13);
     expect(removeTree3.getRoot().getRight().getData()).toBe(14);
     expect(removeTree3.find(15).getLeft()).toBe(null)
-}); */
+});
 
 test('can find a node and return it to query instance', () => {
     expect(threeTree.find(3)).toMatchObject(threeTree.getRoot().getRight());

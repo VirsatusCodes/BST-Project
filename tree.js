@@ -140,73 +140,62 @@ if (inp < pointer.getData()) {
 
 
 const remove = (inp) => {
-  let beforeRemovalTarget;
-  let removalTarget = find(inp);
-  let newNodeValue;
-
-    if(getRoot().getLeft() === null && getRoot().getRight() === null && getRoot().getData() === inp) {
+  let pointer = root;
+  let pointerToPrevious;
+    if(pointer.getLeft() === null && pointer.getRight() === null && pointer.getData() === inp) {
     setRoot(null);
   }
-  else {
-    /* while (beforeRemovalTarget.getLeft().getData() !== removalTarget.getData() ||
-    beforeRemovalTarget.getRight().getData() !== removalTarget.getData()) {
-      console.log('test')
-      beforeRemovalTarget.getData() < inp ? 
-      beforeRemovalTarget = beforeRemovalTarget.getRight() :
-      beforeRemovalTarget = beforeRemovalTarget.getLeft()
-    } */
-    
-    if(removalTarget.getLeft() === null && removalTarget.getRight() === null ){
+  
+    else {
+      while(inp !== pointer.getData()){
+      pointerToPrevious = pointer;
+  
+      inp > pointer.getData() ? 
+      pointer = pointer.getRight() : 
+      pointer = pointer.getLeft();
+    }
+    if(pointer.getLeft() === null && pointer.getRight() === null ){
 
-      inp > getRoot().getData() ?
-      beforeRemovalTarget = find(inOrder()[inOrder().indexOf(inp) - 1]):
-      beforeRemovalTarget = find(inOrder()[inOrder().indexOf(inp) + 1]);
+      inp > pointerToPrevious.getData() ? 
+      pointerToPrevious.setRight(null) : 
+      pointerToPrevious.setLeft(null);
 
-      /* console.log(beforeRemovalTarget.getData(), removalTarget.getData(), newNodeValue.getData()); */
+    } else if(pointer.getLeft() === null && pointer.getRight() !== null){
 
-      console.log('test1')
-      inp > beforeRemovalTarget.getData() ? 
-      beforeRemovalTarget.setRight(null) : 
-      beforeRemovalTarget.setLeft(null);
+      inp > pointerToPrevious.getData()?
+      pointerToPrevious.setRight(pointer.getRight()) :
+      pointerToPrevious.setLeft(pointer.getRight())
 
-    } else if(removalTarget.getLeft() === null && removalTarget.getRight() !== null){
+    } else if(pointer.getLeft() !== null && pointer.getRight() === null){
 
-      
-      console.log('test2')
-
-      inp > newNodeValue.getData()?
-      newNodeValue.setRight(removalTarget.getRight()) :
-      newNodeValue.setLeft(removalTarget.getRight())
-
-    } else if(removalTarget.getLeft() !== null && removalTarget.getRight() === null){
-      console.log('test3')
-      inp < newNodeValue.getData()?
-      newNodeValue.setLeft(removalTarget.getLeft()) :
-      newNodeValue.setRight(removalTarget.getLeft())
+      inp < pointerToPrevious.getData()?
+      pointerToPrevious.setLeft(pointer.getLeft()) :
+      pointerToPrevious.setRight(pointer.getLeft())
     } else {
-      console.log('test4')
-      let originalTarget = removalTarget;
-      removalTarget = removalTarget.getRight();
 
-      while(removalTarget.getLeft() !== null) {
-        newNodeValue = removalTarget;
-        removalTarget = removalTarget.getLeft();
+      let originalTarget = pointer;
+      pointer = pointer.getRight();
+
+      while(pointer.getLeft() !== null) {
+        pointerToPrevious = pointer;
+        pointer = pointer.getLeft();
       };
 
-      originalTarget.setData(removalTarget.getData());
-      newNodeValue.setLeft(null);
+      originalTarget.setData(pointer.getData());
+      pointerToPrevious.setLeft(null);
     }
     }
   };
 
 const find = (inp) => {
   let pointer = root;
-
+  
   while(inp !== pointer.getData()){
+  
     inp > pointer.getData() ? 
-    pointer = pointer.getRight() : 
-    pointer = pointer.getLeft();
-}
+      pointer = pointer.getRight() : 
+      pointer = pointer.getLeft();
+  }
   return pointer
   }
 
