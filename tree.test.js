@@ -60,7 +60,7 @@ test('can add 1 node to a tree in the right spot', () => {
     testTree.insert(11);
     testTree.insert(12);
     testTree.insert(7);
-    testTree.prettyPrint(testTree.getRoot());
+    /* testTree.prettyPrint(testTree.getRoot()); */
 });
 /* insert can leave trees unbalanced the func should have a check for if its unbalanced
 and if so it should rebalance the tree using rebalance in future versions, it also
@@ -156,7 +156,7 @@ test('postOrder can use a function', () => {
 test('height returns correct path length', () => {
     expect(threeTree.height(threeTree.find(3))).toBe(0);
     expect(threeTree.height(threeTree.find(2))).toBe(1);
-    twentyTree.prettyPrint(twentyTree.getRoot());
+   /*  twentyTree.prettyPrint(twentyTree.getRoot()); */
     expect(twentyTree.height(twentyTree.find(9))).toBe(2);
     expect(twentyTree.height(twentyTree.find(6))).toBe(3);
     expect(twentyTree.height(twentyTree.find(11))).toBe(4);
@@ -165,22 +165,32 @@ test('height returns correct path length', () => {
 test('depth returns correct path length', () => {
     expect(threeTree.depth(threeTree.find(2))).toBe(0);
     expect(threeTree.depth(threeTree.find(3))).toBe(1);
-    twentyTree.prettyPrint(twentyTree.getRoot());
+    /* twentyTree.prettyPrint(twentyTree.getRoot()); */
     expect(twentyTree.depth(twentyTree.find(6))).toBe(1);
     expect(twentyTree.depth(twentyTree.find(9))).toBe(2);
     expect(twentyTree.depth(twentyTree.find(10))).toBe(3);
     expect(twentyTree.depth(twentyTree.find(7))).toBe(4);
 });
 
-test.only('isBalanced can differentiate between a balanced and non-balanced tree', () => {
+test('isBalanced can differentiate between a balanced and non-balanced tree', () => {
     const balancedTest = Tree ([1,2,3])
     expect(balancedTest.isBalanced()).toBe(true);
     balancedTest.insert(4);
     balancedTest.insert(5);
     balancedTest.insert(6);
-    balancedTest.insert(7);
-    balancedTest.insert(8);
-    balancedTest.prettyPrint(balancedTest.getRoot());
+    /* balancedTest.prettyPrint(balancedTest.getRoot()); */
     expect(balancedTest.isBalanced()).toBe(false);
 
+});
+
+test.only('rebalance works', () => {
+    const balancedTest = Tree ([1,2,3])
+    balancedTest.insert(4);
+    balancedTest.insert(5);
+    balancedTest.insert(6);
+    balancedTest.prettyPrint(balancedTest.getRoot());
+    expect(balancedTest.getRoot().getData()).toBe(2);
+    balancedTest.rebalance();
+    balancedTest.prettyPrint(balancedTest.getRoot());
+    expect(balancedTest.getRoot().getData()).toBe(4);
 });

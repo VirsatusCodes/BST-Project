@@ -323,7 +323,7 @@ const postOrder = (func, node = root, nodeValues = []) => {
 
  const isBalanced = () => {
   let depthLog = [];
-  let valuesOfnodes = inOrder()
+  let valuesOfnodes = inOrder();
   
   while(valuesOfnodes.length !== 0) {
     depthLog.push(depth(find(valuesOfnodes[0])));
@@ -339,7 +339,7 @@ const postOrder = (func, node = root, nodeValues = []) => {
   };
 
  const rebalance = () => {
-
+  setRoot(buildTree(inOrder()));
  };
 
 
