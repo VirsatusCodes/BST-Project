@@ -115,12 +115,15 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 const insert = (inp) => {
+
   /* would want to include checking if value is already
   present in the BST in further development of this function for sure */
-let numberOfElements = arr.length;
+let numberOfElements = inOrder().length;
 let pointer = root;
 let counter = 0;
 numberOfElements++;
+console.log(numberOfElements)
+
 
 while(counter++ < Math.ceil(Math.log2(numberOfElements))){
 if(inp > pointer.getData() && pointer.getRight() !== null) {
@@ -308,8 +311,17 @@ const postOrder = (func, node = root, nodeValues = []) => {
   return counter
    };
 
- const depth = () => {
+ const depth = (inp) => {
+  let pointer = getRoot();
+  let counter = 0
+  while(inp !== pointer){
+    counter++
 
+    inp.getData() > pointer.getData() ? 
+      pointer = pointer.getRight() : 
+      pointer = pointer.getLeft();
+  }
+  return counter
  };
 
  const isBalanced = () => {
@@ -339,4 +351,5 @@ return {prettyPrint,
         rebalance}
 }
 /* many of these functions are fragile, not looking
-to make it work for all use cases atm*/
+to make it work for all use cases atm (esp when tree is
+  unbalanced due to insertion or deletion)*/
