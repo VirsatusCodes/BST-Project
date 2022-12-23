@@ -121,9 +121,6 @@ const insert = (inp) => {
 let numberOfElements = inOrder().length;
 let pointer = root;
 let counter = 0;
-numberOfElements++;
-console.log(numberOfElements)
-
 
 while(counter++ < Math.ceil(Math.log2(numberOfElements))){
 if(inp > pointer.getData() && pointer.getRight() !== null) {
@@ -325,8 +322,21 @@ const postOrder = (func, node = root, nodeValues = []) => {
  };
 
  const isBalanced = () => {
+  let depthLog = [];
+  let valuesOfnodes = inOrder()
+  
+  while(valuesOfnodes.length !== 0) {
+    depthLog.push(depth(find(valuesOfnodes[0])));
+    valuesOfnodes.shift();
+  }
 
- };
+ if(depthLog.sort()[depthLog.length-1] <= Math.floor(Math.log2(depthLog.length))) {
+  return true
+
+ } else {
+  return false
+ }
+  };
 
  const rebalance = () => {
 

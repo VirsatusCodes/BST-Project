@@ -42,27 +42,29 @@ test('works on bigger trees(8)', () => {
     expect(bigTree.getRoot().getLeft().getRight().getRight()).toBe(null);
 });
 
-test.only('can add 1 node to a tree in the right spot', () => {
+test('can add 1 node to a tree in the right spot', () => {
     const testTree = Tree([1,2,3,5,6]);
     expect(testTree.getRoot().getData()).toBe(3);
     expect(testTree.getRoot().getRight().getData()).toBe(6);
     expect(testTree.getRoot().getRight().getLeft().getData()).toBe(5);
     expect(testTree.getRoot().getRight().getRight()).toBe(null);
-    testTree.insert(7);
-    expect(testTree.getRoot().getRight().getRight().getData()).toBe(7);
+    testTree.insert(8);
+    expect(testTree.getRoot().getRight().getRight().getData()).toBe(8);
     expect(testTree.getRoot().getRight().getLeft().getData()).toBe(5);
     testTree.insert(4);
     expect(testTree.getRoot().getRight().getLeft().getLeft().getData()).toBe(4);
-    testTree.insert(8);
-    expect(testTree.getRoot().getRight().getRight().getRight().getData()).toBe(8);
     testTree.insert(9);
-    expect(testTree.getRoot().getRight().getRight().getRight().getRight().getData()).toBe(9);
+    expect(testTree.getRoot().getRight().getRight().getRight().getData()).toBe(9);
     testTree.insert(10);
+    expect(testTree.getRoot().getRight().getRight().getRight().getRight().getData()).toBe(10);
     testTree.insert(11);
+    testTree.insert(12);
+    testTree.insert(7);
     testTree.prettyPrint(testTree.getRoot());
 });
 /* insert can leave trees unbalanced the func should have a check for if its unbalanced
-and if so it should rebalance the tree using rebalance in future versions*/
+and if so it should rebalance the tree using rebalance in future versions, it also
+doesnt work properly itself if the tree is too unbalanced*/
 
 /* remove has issues with unbalanced trees */
 test('can delete a node targeted based on value that has no children', () => {
@@ -170,14 +172,15 @@ test('depth returns correct path length', () => {
     expect(twentyTree.depth(twentyTree.find(7))).toBe(4);
 });
 
-test('isBalanced can differentiate between a balanced and non-balanced tree', () => {
+test.only('isBalanced can differentiate between a balanced and non-balanced tree', () => {
     const balancedTest = Tree ([1,2,3])
-    expect(sixTree.isBalanced()).toBe(true);
+    expect(balancedTest.isBalanced()).toBe(true);
     balancedTest.insert(4);
     balancedTest.insert(5);
     balancedTest.insert(6);
     balancedTest.insert(7);
     balancedTest.insert(8);
     balancedTest.prettyPrint(balancedTest.getRoot());
+    expect(balancedTest.isBalanced()).toBe(false);
 
 });
