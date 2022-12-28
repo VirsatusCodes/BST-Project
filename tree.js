@@ -330,7 +330,7 @@ const postOrder = (func, node = root, nodeValues = []) => {
     valuesOfnodes.shift();
   }
 
- if(depthLog.sort()[depthLog.length-1] <= Math.floor(Math.log2(depthLog.length))) {
+ if(depthLog.sort(function(a, b){return a - b})[depthLog.length-1] <= Math.floor(Math.log2(depthLog.length))) {
   return true
 
  } else {
@@ -360,6 +360,3 @@ return {prettyPrint,
         isBalanced,
         rebalance}
 }
-/* many of these functions are fragile, not looking
-to make it work for all use cases atm (esp when tree is
-  unbalanced due to insertion or deletion)*/

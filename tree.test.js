@@ -183,7 +183,7 @@ test('isBalanced can differentiate between a balanced and non-balanced tree', ()
 
 });
 
-test.only('rebalance works', () => {
+test('rebalance works', () => {
     const balancedTest = Tree ([1,2,3])
     balancedTest.insert(4);
     balancedTest.insert(5);
