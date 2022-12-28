@@ -194,3 +194,35 @@ test('rebalance works', () => {
     balancedTest.prettyPrint(balancedTest.getRoot());
     expect(balancedTest.getRoot().getData()).toBe(4);
 });
+
+test('BST driver script', () => {
+    const randomInt= (min, max) => {
+        return Math.ceil(Math.random() * (max - min) + min);
+      };
+      
+      const randomArrValues = () => {
+      
+      let finalArr = []
+      for (let i = randomInt(6, 15) ; i > 0 ; i--) {
+        finalArr.push(randomInt(1, 99))
+      }
+      return finalArr
+      }
+
+    const scriptTree = Tree(randomArrValues());
+    expect(scriptTree.isBalanced()).toBe(true);
+    console.log(scriptTree.levelOrder());
+    console.log(scriptTree.preOrder());
+    console.log(scriptTree.postOrder());
+    console.log(scriptTree.inOrder());
+    scriptTree.insert(101);
+    scriptTree.insert(102);
+    scriptTree.insert(103);
+    expect(scriptTree.isBalanced()).toBe(false);
+    scriptTree.rebalance();
+    expect(scriptTree.isBalanced()).toBe(true);
+    console.log(scriptTree.levelOrder());
+    console.log(scriptTree.preOrder());
+    console.log(scriptTree.postOrder());
+    console.log(scriptTree.inOrder());
+});
